@@ -1,0 +1,73 @@
+﻿using System;
+
+namespace BTH2_Bai01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int Month, Year;
+            NhapThangNam(out Month, out Year);
+            while (!IsValidMonthYear(Month, Year))
+            {
+                Console.WriteLine("Thang/Nam khong hop le, nhap lai!");
+                NhapThangNam(out Month,out Year);
+            }    
+            XuatLich(GetDayofMonth(Month,Year),GetFirstDayofWeek(Month,Year));
+        }
+        
+        //Nhập Tháng Năm
+        static void NhapThangNam( out int Month, out int Year)
+        {
+            Console.WriteLine("Moi ban nhap thang nam");
+            Console.Write("Thang: ");
+            Month = int.Parse(Console.ReadLine());
+            Console.Write("Nam: ");
+            Year = int.Parse(Console.ReadLine());
+        }
+
+        //Kiểm tra Tháng Năm hợp lệ
+        static bool IsValidMonthYear(int Month, int Year)
+        {
+            if (Month <= 0 || Month > 12) return false;
+            if (Year == 0) return false;
+            return true;
+        }
+
+        //Trả về số ngày của tháng
+        static int GetDayofMonth(int Month,int Year)
+        {
+           return DateTime.DaysInMonth(Year, Month);
+        }
+        //Trả về Thứ đầu tiên của ngày trong tháng
+        static int GetFirstDayofWeek (int Month,int Year)
+        {
+            DateTime dt = new DateTime(Year, Month, 1);
+            return (int)dt.DayOfWeek;
+        }
+
+        static void XuatLich(int Days, int DayofWeek)
+        {
+            Console.WriteLine("{0,5}{1,6}{2,6}{3,6}{4,6}{5,6}{6,6}","Sun","Mon","Tue","Wed","Thu","Fri","Sat");
+
+            for (int i = 0; i < DayofWeek; i++)
+            {
+                Console.Write("{0,6}", "");
+            } 
+                
+            int pos = 1;
+            for (int j =DayofWeek; pos<= Days; j++)
+            {
+                if (j == 7)
+                {
+                    j = 0;
+                    Console.WriteLine();
+                }
+                Console.Write($"{pos++,5} ");
+                
+            }
+                
+        }
+
+    }
+}
