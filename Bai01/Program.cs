@@ -13,7 +13,7 @@ namespace BTH2_Bai01
                 Console.WriteLine("Thang/Nam khong hop le, nhap lai!");
                 NhapThangNam(out Month,out Year);
             }    
-            XuatLich(GetDayofMonth(Month,Year),GetFirstDayofWeek(Month,Year));
+            XuatLich(GetDayofMonth(Month,Year),GetFirstDayofWeek(Month,Year),Month,Year);
         }
         
         //Nhập Tháng Năm
@@ -39,15 +39,18 @@ namespace BTH2_Bai01
         {
            return DateTime.DaysInMonth(Year, Month);
         }
+
         //Trả về Thứ đầu tiên của ngày trong tháng
         static int GetFirstDayofWeek (int Month,int Year)
         {
             DateTime dt = new DateTime(Year, Month, 1);
             return (int)dt.DayOfWeek;
         }
-
-        static void XuatLich(int Days, int DayofWeek)
+    
+        //In lịch ra màn hình
+        static void XuatLich(int Days, int DayofWeek, int Month,int Year)
         {
+            Console.WriteLine($"\nMonth: {Month:D2}/{Year}");
             Console.WriteLine("{0,5}{1,6}{2,6}{3,6}{4,6}{5,6}{6,6}","Sun","Mon","Tue","Wed","Thu","Fri","Sat");
 
             for (int i = 0; i < DayofWeek; i++)
@@ -63,9 +66,9 @@ namespace BTH2_Bai01
                     j = 0;
                     Console.WriteLine();
                 }
-                Console.Write($"{pos++,5} ");
-                
+                Console.Write($"{pos++,5} "); 
             }
+            Console.WriteLine();
                 
         }
 
