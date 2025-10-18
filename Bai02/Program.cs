@@ -28,6 +28,7 @@ namespace BTH2_Bai02
         //Xuất thư mục và file như lệnh dir
         static void DisplayDirectory (string path)
         {
+            Console.WriteLine("\nDirectory of " + path);
             string[] items = Directory.GetFileSystemEntries(path);
             foreach (string item in items)
             {
