@@ -7,12 +7,17 @@ namespace BTH02_Bai03
         static void Main(string[] args)
         {
             int m, n, k;
+            //(a)
             int[,] arr = InputArr(out m, out n);
             Console.Write("Nhap phan tu muon tim: ");
             k = int.Parse(Console.ReadLine());
+            //(a)
             OutArr(arr, m, n);
+            //(b)
             FindItem(arr, k);
+            //(c)
             OutPrimeItems(arr);
+            //(d)
             MaxPrimeRow(arr);
         }
 
@@ -130,7 +135,7 @@ namespace BTH02_Bai03
                     }  
                     if (count>MaxCount) MaxCount = count;
                 }
-                return MaxCount;
+            return MaxCount;
         }
 
         //(d) Tìm dòng có nhiều số nguyên tố nhất
@@ -155,7 +160,6 @@ namespace BTH02_Bai03
                     {
                         Console.WriteLine($"Dong {i} co nhieu so nguyen to nhat - {MaxCount} so");
                     }
-
                 }
             }
         }
