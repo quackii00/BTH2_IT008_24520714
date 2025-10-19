@@ -6,21 +6,21 @@ namespace BTH02_Bai03
     {
         static void Main(string[] args)
         {
-            int m, n,k;
-            int[,] arr =InputArr(out m, out n);
+            int m, n, k;
+            int[,] arr = InputArr(out m, out n);
             Console.Write("Nhap phan tu muon tim: ");
             k = int.Parse(Console.ReadLine());
             OutArr(arr, m, n);
             FindItem(arr, k);
             OutPrimeItems(arr);
             MaxPrimeRow(arr);
-
         }
 
 
         //(a) Nhập ma trận 2 chiều các số nguyên
         static int[,] InputArr(out int m, out int n)
         {
+            Console.WriteLine("(a) Nhap ma tran");
             Console.Write("Nhap so hang: ");
             m = int.Parse(Console.ReadLine());
             Console.Write("Nhap so cot: ");
@@ -38,14 +38,14 @@ namespace BTH02_Bai03
         }
 
         //(a) Xuất ma trận
-        static void OutArr(int[,] arr,int m, int n)
+        static void OutArr(int[,] arr, int m, int n)
         {
             Console.WriteLine($"(a) Ma tran {m}x{n}");
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    Console.Write(arr[i, j]+" ");
+                    Console.Write(arr[i, j] + " ");
                 }
                 Console.WriteLine();
             }
@@ -54,18 +54,25 @@ namespace BTH02_Bai03
         //(b)Tìm kiếm 1 phần tử trong ma trận
         static void FindItem(int[,] arr, int item)
         {
+            int temp = 0;
             Console.WriteLine($"(b) Phan tu {item} nam o vi tri: ");
-            for(int i = 0;i < arr.GetLength(0);i++)
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
-                for(int j=0; j < arr.GetLength(1);j++)
+                for (int j = 0; j < arr.GetLength(1); j++)
                 {
-                    if (arr[i,j] == item)
+                    if (arr[i, j] == item)
                     {
                         Console.WriteLine($"({i},{j})");
-                    }    
-                }    
+                        temp++;
+                    }
+                }
+            }
+            if (temp == 0)
+            {
+                Console.WriteLine("Khong tim thay!");
             }
         }
+   
         //Kiểm tra số nguyên tố
         static bool isPrime(int x)
         {
@@ -80,7 +87,7 @@ namespace BTH02_Bai03
         //(c) Xuất các phần tử là số nguyên tố
         static void OutPrimeItems(int[,] arr)
         {
-            Console.WriteLine("(c) Cac so nguyen to trong mang: ");
+            Console.WriteLine("(c) Cac phan tu la so nguyen to trong mang: ");
             int temp = 0;
             for (int i =0; i < arr.GetLength(0); i++)
             {
@@ -115,25 +122,27 @@ namespace BTH02_Bai03
         static void MaxPrimeRow(int[,] arr)
         {
             int MaxCount = MaxCountPrimeinRow(arr);
-            Console.WriteLine("\n(d) Dong co nhieu so nguyen to nhat:");
-            for (int i = 0; i < arr.GetLength(0); i++)
+            if (MaxCount == 0)
             {
-               int count = 0;
-               for (int j = 0; j < arr.GetLength(1); j++)
+                Console.WriteLine("(d) Khong co hang nao co so nguyen to");
+            }
+            else
+            {
+                Console.WriteLine("\n(d) Dong co nhieu so nguyen to nhat:");
+                for (int i = 0; i < arr.GetLength(0); i++)
                 {
-                   if (isPrime(arr[i, j])) count++;
-                }
-                   if (count == MaxCount)
-                {
-                    Console.WriteLine($"Dong {i} - {MaxCount} so nguyen to");
-                }
-                 
-                }
-                
+                    int count = 0;
+                    for (int j = 0; j < arr.GetLength(1); j++)
+                    {
+                        if (isPrime(arr[i, j])) count++;
+                    }
+                    if (count == MaxCount)
+                    {
+                        Console.WriteLine($"Dong {i} - {MaxCount} so nguyen to");
+                    }
 
+                }
+            }
         }
-
-
     }
-
 }
