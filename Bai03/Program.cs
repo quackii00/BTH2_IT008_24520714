@@ -36,7 +36,6 @@ namespace BTH02_Bai03
                 Console.Write($"Nhap dong {i + 1}: ");
                 string[] parts = Console.ReadLine().Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 while (parts.Length != n)
-                    while (parts.Length != n )
                 {
                     Console.WriteLine($"Phai nhap dung {n} so!");
                     Console.Write($"Nhap lai dong {i + 1}: ");
@@ -50,7 +49,7 @@ namespace BTH02_Bai03
                         Console.Write($"Gia tri '{parts[j]}' khong hop le, nhap lai phan tu [{i},{j}]: ");
                         parts[j] = Console.ReadLine();
                     }
-                    arr[i,j]= int.Parse(parts[j]);
+                    arr[i, j] = int.Parse(parts[j]);
                 }
             }
             return arr;
