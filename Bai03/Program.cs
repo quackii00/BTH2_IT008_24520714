@@ -2,7 +2,7 @@
 
 namespace BTH02_Bai03
 {
-    class program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -28,10 +28,24 @@ namespace BTH02_Bai03
             int[,] arr = new int[m, n];
             for (int i = 0; i < m; i++)
             {
-                string[] parts = Console.ReadLine().Split(' ');
+                Console.Write($"Nhap dong {i + 1}: ");
+                string[] parts = Console.ReadLine().Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                while (parts.Length != n)
+                    while (parts.Length != n )
+                {
+                    Console.WriteLine($"Phai nhap dung {n} so!");
+                    Console.Write($"Nhap lai dong {i + 1}: ");
+                    parts = Console.ReadLine().Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                }
                 for (int j = 0; j < n; j++)
                 {
-                    arr[i, j] = int.Parse(parts[j]);
+                    int value;
+                    while (!int.TryParse(parts[j], out value))
+                    {
+                        Console.Write($"Gia tri '{parts[j]}' khong hop le, nhap lai phan tu [{i},{j}]: ");
+                        parts[j] = Console.ReadLine();
+                    }
+                    arr[i,j]= int.Parse(parts[j]);
                 }
             }
             return arr;
@@ -40,7 +54,7 @@ namespace BTH02_Bai03
         //(a) Xuất ma trận
         static void OutArr(int[,] arr, int m, int n)
         {
-            Console.WriteLine($"(a) Ma tran {m}x{n}");
+            Console.WriteLine($"\n(a) Ma tran {m}x{n}");
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
@@ -55,7 +69,7 @@ namespace BTH02_Bai03
         static void FindItem(int[,] arr, int item)
         {
             int temp = 0;
-            Console.WriteLine($"(b) Phan tu {item} nam o vi tri: ");
+            Console.WriteLine($"\n(b) Phan tu {item} nam o vi tri: ");
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 for (int j = 0; j < arr.GetLength(1); j++)
@@ -87,7 +101,7 @@ namespace BTH02_Bai03
         //(c) Xuất các phần tử là số nguyên tố
         static void OutPrimeItems(int[,] arr)
         {
-            Console.WriteLine("(c) Cac phan tu la so nguyen to trong mang: ");
+            Console.WriteLine("\n(c) Cac phan tu la so nguyen to trong mang: ");
             int temp = 0;
             for (int i =0; i < arr.GetLength(0); i++)
             {
@@ -100,7 +114,8 @@ namespace BTH02_Bai03
                     }                       
                 }    
             }
-            if (temp == 0) Console.WriteLine("trong!");
+            if (temp == 0) Console.WriteLine("Khong co phan tu nao la so nguyen to!");
+            else Console.WriteLine();
         }
         //Tìm Tổng số nguyên tố lớn nhất có trong 1 dòng
         static int MaxCountPrimeinRow(int[,] arr)
@@ -138,7 +153,7 @@ namespace BTH02_Bai03
                     }
                     if (count == MaxCount)
                     {
-                        Console.WriteLine($"Dong {i} - {MaxCount} so nguyen to");
+                        Console.WriteLine($"Dong {i} co nhieu so nguyen to nhat - {MaxCount} so");
                     }
 
                 }
