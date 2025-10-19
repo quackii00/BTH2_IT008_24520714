@@ -12,9 +12,11 @@ namespace BTH2_Bai04
             a.Nhap();
             Console.WriteLine("Nhap phan so b ");
             b.Nhap();
+
             //input (b)
             MangPhanSo arr = new MangPhanSo();
             arr.NhapMang();
+
             //output (a)
             Console.WriteLine("(a)Ket qua tinh toan +, -, *, / giua 2 phan so");
             Console.WriteLine($"a = {a.GetTuSo()}/{a.GetMauSo()}, b = {b.GetTuSo()}/{b.GetMauSo()}");
@@ -25,7 +27,15 @@ namespace BTH2_Bai04
             Console.Write("\na * b = ");
             (a*b).Xuat();
             Console.Write("\na / b = ");
-            (a / b).Xuat();
+            try
+            {
+                (a / b).Xuat();
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.Write(ex.Message);
+            }
+
             //output (b)
             Console.WriteLine("\n(b) Mang ban dau");
             arr.XuatMang();
@@ -164,6 +174,10 @@ namespace BTH2_Bai04
         }
         public static PhanSo operator /(PhanSo a, PhanSo b)
         {
+            if (b.GetTuSo() ==0)
+            {
+                throw new DivideByZeroException("Khong the chia cho phan so co tu so = 0");
+            }    
             return new PhanSo(a.tuSo * b.mauSo, a.mauSo * b.tuSo);
         }
 
@@ -184,7 +198,7 @@ namespace BTH2_Bai04
             int temp;
             while (!int.TryParse(part, out temp) || temp <= 0)
             {
-                Console.Write("Khong dung, moi nhap lai!");
+                Console.Write("Khong dung, moi nhap lai n = ");
                 part = Console.ReadLine();
             }
             this.n = temp;
