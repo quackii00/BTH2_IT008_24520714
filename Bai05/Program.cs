@@ -1,7 +1,6 @@
 ﻿using System;
 namespace BTH2_Bai05
 {
-   
     class Program
     {
         static void Main(string[] args)
@@ -10,10 +9,12 @@ namespace BTH2_Bai05
             double GiaBan;
             double DienTich;
             QuanLi ListBDS = new QuanLi();
+            //(a)Nhập danh sách bất động sản
             ListBDS.NhapDS();
+            //(d)Nhập thông tin khu đất muốn tìm
             Console.WriteLine("\nNhap thong tin khu dat muon tim");
             Console.Write("Nhap Dia Diem: ");
-            DiaDiem=Console.ReadLine();
+            DiaDiem = Console.ReadLine();
             Console.Write("Nhap Gia Ban: ");
             GiaBan = IsDouble();
             Console.Write("Nhap Dien Tich: ");
@@ -31,7 +32,7 @@ namespace BTH2_Bai05
         public static double IsDouble()
         {
             double temp;
-            while (!double.TryParse(Console.ReadLine(), out temp))
+            while (!double.TryParse(Console.ReadLine(), out temp) || temp <= 0)
             {
                 Console.Write("Nhap khong dung, hay nhap lai: ");
             }
@@ -40,10 +41,10 @@ namespace BTH2_Bai05
         public static int IsYear()
         {
             int temp;
-            while (!int.TryParse(Console.ReadLine(),out temp) || temp <=0)
+            while (!int.TryParse(Console.ReadLine(), out temp) || temp <= 0)
             {
                 Console.Write("Nhap khong dung, hay nhap lai: ");
-            }    
+            }
             return temp;
         }
         public static byte IsByte()
@@ -58,15 +59,14 @@ namespace BTH2_Bai05
         public static byte Loai()
         {
             byte temp;
-            while (!byte.TryParse(Console.ReadLine(), out temp) || (temp <= 0) || (temp>= 4))
+            while (!byte.TryParse(Console.ReadLine(), out temp) || (temp <= 0) || (temp >= 4))
             {
                 Console.Write("Nhap khong dung, hay nhap lai (1,2,3): ");
             }
             return temp;
         }
-
     }
-    
+
     class QuanLi
     {
         private List<KhuDat> DanhSachBDS = new List<KhuDat>();
@@ -79,8 +79,8 @@ namespace BTH2_Bai05
             {
                 Console.Write("Nhap loai (1,2,3): ");
                 Loai = Program.Loai();
-                Console.WriteLine($"Nhap Thong tin Bat Dong San thu {i+1}");
-                switch(Loai)
+                Console.WriteLine($"Nhap Thong tin Bat Dong San thu {i + 1}");
+                switch (Loai)
                 {
                     case 1:
                         {
@@ -95,7 +95,7 @@ namespace BTH2_Bai05
                             DanhSachBDS.Add(new NhaPho());
                             DanhSachBDS[i].Nhap();
                             break;
-                        } 
+                        }
                     case 3:
                         {
                             Console.WriteLine("Nhap thong tin Chung Cu");
@@ -103,7 +103,7 @@ namespace BTH2_Bai05
                             DanhSachBDS[i].Nhap();
                             break;
                         }
-                }    
+                }
             }
 
         }
@@ -118,8 +118,8 @@ namespace BTH2_Bai05
         }
         public double TinhTongGiaBan(byte Loai)
         {
-            double sumGiaBan= 0;
-           
+            double sumGiaBan = 0;
+
             if (Loai == 1)
             {
                 foreach (var BDS in DanhSachBDS)
@@ -130,7 +130,7 @@ namespace BTH2_Bai05
                     }
                 }
             }
-            else if (Loai ==2)
+            else if (Loai == 2)
             {
                 foreach (var BDS in DanhSachBDS)
                 {
@@ -139,7 +139,7 @@ namespace BTH2_Bai05
                         sumGiaBan += BDS.GetGiaBan();
                     }
                 }
-            } 
+            }
             else
             {
                 foreach (var BDS in DanhSachBDS)
@@ -150,7 +150,6 @@ namespace BTH2_Bai05
                     }
                 }
             }
-
             return sumGiaBan;
         }
         public void XuatDSThoaDieuKien()
@@ -160,36 +159,36 @@ namespace BTH2_Bai05
             {
                 if (bds.GetType() == typeof(KhuDat))
                 {
-                    if(bds.GetDienTich() >100)
+                    if (bds.GetDienTich() > 100)
                     {
                         bds.Xuat();
                         Console.WriteLine();
                         temp++;
-                    }    
-                }    
-                else if ( bds is NhaPho nhapho)
+                    }
+                }
+                else if (bds is NhaPho nhapho)
                 {
-                    if (nhapho.GetDienTich() >60 && nhapho.GetNamXayDung() >=2019)
+                    if (nhapho.GetDienTich() > 60 && nhapho.GetNamXayDung() >= 2019)
                     {
                         nhapho.Xuat();
                         Console.WriteLine();
                         temp++;
-                    }    
-                }    
-            }   
+                    }
+                }
+            }
             if (temp == 0)
             {
                 Console.WriteLine("Khong co khu dat va nha pho nao thoa dieu kien");
-            } 
-                
+            }
+
         }
-        public void TimKiem(string diaDiem, double giaBan,double dienTich)
+        public void TimKiem(string diaDiem, double giaBan, double dienTich)
         {
             diaDiem = diaDiem.ToLower();
             byte temp = 0;
-            foreach(var bds in DanhSachBDS)
+            foreach (var bds in DanhSachBDS)
             {
-                if (bds is NhaPho|| bds is ChungCu)
+                if (bds is NhaPho || bds is ChungCu)
                 {
                     if ((bds.GetDiaDiem().ToLower() == diaDiem)
                             && (bds.GetGiaBan() <= giaBan)
@@ -204,15 +203,16 @@ namespace BTH2_Bai05
                         {
                             chungCu.Xuat();
                             Console.WriteLine();
-                        }    
-                    }  
-                    temp++;
-                }     
-            }   
+                        }
+                        temp++;
+                    }
+                    
+                }
+            }
             if (temp == 0)
             {
                 Console.WriteLine("Khong co nha pho hoac chung cu phu hop yeu cau");
-            }    
+            }
         }
 
     }
@@ -254,7 +254,7 @@ namespace BTH2_Bai05
             return DiaDiem;
         }
     }
-    class NhaPho :  KhuDat
+    class NhaPho : KhuDat
     {
         private int namXayDung;
         private byte soTang;
@@ -282,7 +282,7 @@ namespace BTH2_Bai05
         }
 
     }
-    class ChungCu: KhuDat
+    class ChungCu : KhuDat
     {
         private byte tang;
         public override void Nhap()
@@ -301,6 +301,5 @@ namespace BTH2_Bai05
             Console.WriteLine($"Tang: {tang}");
         }
     }
-        
 }
 
